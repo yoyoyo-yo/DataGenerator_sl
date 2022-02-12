@@ -63,7 +63,7 @@ with st.expander('Gaussian noise'):
 # category
 with st.expander('Category'):
     cat_col_name = st.text_input('category column name', value='category1')
-    cat_input = st.text_area('input category(, weight)', value="""Newt,1\nfrog,2\nturtle,4""")
+    cat_input = st.text_area('input category(, weight)   if weight is none, weight=1', value="""Newt,1\nfrog,2\nturtle,4""")
 
     def category_parser(text):
         cats = {}
@@ -71,7 +71,15 @@ with st.expander('Category'):
 
         for line in text.split('\n'):
             line = line.strip()
-            c, w = line.split(',')
+            if ',' in line:
+                c, w = line.split(',')
+                c = c.strip()
+                w = w.strip()
+                if w == '':
+                    w = 1
+            else:
+                c = line.strip()
+                w = 1
             w = float(w)
             sums += w
             cats[c] = w
