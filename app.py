@@ -71,7 +71,7 @@ with st.expander('Distribution'):
 
     if dist_select == 'Gaussian':
         gn_mean = st.slider('Gaussian noise mean', -99., 99., value=0.)
-        gn_std  = st.slider('Gaussian noise std',  -99., 99., value=1.)
+        gn_std  = st.slider('Gaussian noise std',  0., 99., value=1.)
         num_vals = np.random.normal(gn_mean, gn_std, size=data_n)
 
     if dist_select == 'Uniform':
