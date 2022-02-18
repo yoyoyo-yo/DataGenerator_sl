@@ -42,10 +42,9 @@ with st.expander('data size'):
         data_n  = st.text_input('', value=data_n)
         data_n = int(data_n)
 
-if 'data_n' in st.session_state:
-    if 'gen_data' in st.session_state:
-        del st.session_state['gen_data']
-        gen_data = {}
+if 'data_n' in st.session_state and data_n != st.session_state['data_n'] and 'gen_data' in st.session_state:
+    del st.session_state['gen_data']
+    gen_data = {}
 
 # output file name
 with st.expander('output file name'):
@@ -163,7 +162,7 @@ with st.expander('Category'):
     st.text(cat_vals[:min(5, data_n)])
     fig, ax = plt.subplots(figsize=(4, 2))
     ax.grid()
-    ax.hist(cat_vals)
+    ax.hist(np.sort(cat_vals))
     ax.set_title('distribution')
     st.pyplot(fig)
 
